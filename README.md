@@ -19,7 +19,7 @@ From your MagicMirror `modules/` folder:
 
 ```bash
 cd ~/MagicMirror/modules
-git clone <your-repo-url> MMM-KlydoPi
+git clone https://github.com/AJOCHAM/MMM-KlydoPi
 # or just copy this MMM-KlydoPi folder into modules/
 ```
 
