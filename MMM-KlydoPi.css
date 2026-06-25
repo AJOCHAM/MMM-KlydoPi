@@ -1,23 +1,46 @@
 /* MMM-KlydoPi styles. All selectors are scoped under .klydo-root so they
- * don't collide with other MagicMirror modules. */
+ * don't collide with other MagicMirror modules.
+ *
+ * Layout mirrors the Klydoclock reference: a round clock face (with the
+ * image/video background filling the circle) and a small round pendulum,
+ * both shown as circular windows on a black background. Nothing else is
+ * visible. */
 
 .klydo-root {
-  --klydo-face: 70vmin;
+  --klydo-face: 70vmin;        /* clock circle diameter */
+  --klydo-pend: 18vmin;        /* pendulum circle diameter */
   --klydo-hand: #f5f3ec;
   --klydo-second: #e8b04b;
   --klydo-tick: rgba(245, 243, 236, 0.55);
+  --klydo-window-bg: #b14cf0;  /* color shown behind/around media inside a circle */
   position: relative;
+  background: #000;
 }
 
-/* When fullscreen, fill the whole mirror and sit behind nothing. */
+/* Fill the whole mirror with black; the two circles sit on top. */
 .klydo-root.klydo-fullscreen {
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100vh;
+  background: #000;
 }
 
-.klydo-root .klydo-bg {
+/* ---------- Clock face (round window) ---------- */
+.klydo-root .klydo-clock {
+  position: absolute;
+  left: 50%;
+  top: 38%;
+  transform: translate(-50%, -50%);
+  width: var(--klydo-face);
+  height: var(--klydo-face);
+  border-radius: 50%;
+  overflow: hidden;                 /* clip background to the circle */
+  background: var(--klydo-window-bg);
+}
+
+/* background layers live INSIDE the clock circle */
+.klydo-root .klydo-clock .klydo-bg {
   position: absolute;
   inset: 0;
   background-size: cover;
@@ -26,9 +49,9 @@
   transition: opacity 1.5s ease;
   filter: saturate(1.05);
 }
-.klydo-root .klydo-bg.show { opacity: 1; }
+.klydo-root .klydo-clock .klydo-bg.show { opacity: 1; }
 
-.klydo-root .klydo-video {
+.klydo-root .klydo-clock .klydo-video {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -37,28 +60,22 @@
   opacity: 0;
   transition: opacity 1.5s ease;
 }
-.klydo-root .klydo-video.show { opacity: 1; }
+.klydo-root .klydo-clock .klydo-video.show { opacity: 1; }
 
-.klydo-root .klydo-vignette {
+/* subtle vignette inside the circle so hands stay readable */
+.klydo-root .klydo-clock .klydo-vignette {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 42%,
-    rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.45) 100%);
+  background: radial-gradient(circle at 50% 50%,
+    rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.35) 100%);
 }
 
-.klydo-root .klydo-clock {
-  position: absolute;
-  left: 50%;
-  top: 46%;
-  transform: translate(-50%, -50%);
-  width: var(--klydo-face);
-  height: var(--klydo-face);
-}
 .klydo-root .klydo-dial {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.6));
 }
 
 .klydo-root .klydo-tick { stroke: var(--klydo-tick); }
@@ -71,24 +88,31 @@
 .klydo-root .klydo-second { stroke: var(--klydo-second); stroke-width: 2.5; }
 .klydo-root .klydo-cap    { fill: var(--klydo-second); }
 
+/* ---------- Pendulum (round window) ---------- */
 .klydo-root .klydo-pendulum {
   position: absolute;
   left: 50%;
-  bottom: 2vh;
-  transform: translateX(-50%);
-  width: 18vmin;
-  height: 30vmin;
+  top: 80%;
+  transform: translate(-50%, -50%);
+  width: var(--klydo-pend);
+  height: var(--klydo-pend);
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--klydo-window-bg);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 .klydo-root .klydo-pendulum svg {
-  width: 100%;
+  width: 70%;
   height: 100%;
   overflow: visible;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6));
 }
 .klydo-root .klydo-rod { stroke: var(--klydo-hand); stroke-width: 3; }
 .klydo-root .klydo-bob { fill: var(--klydo-second); stroke: rgba(0, 0, 0, 0.25); stroke-width: 2; }
 .klydo-root .klydo-swing { transform-origin: 60px 0px; }
 
+/* ---------- status text ---------- */
 .klydo-root .klydo-status {
   position: absolute;
   left: 8px;

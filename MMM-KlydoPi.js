@@ -22,7 +22,9 @@ Module.register("MMM-KlydoPi", {
     videoRatio: 0.5,           // when "mixed": chance of choosing video (0..1)
 
     // appearance
-    faceSize: "70vmin",
+    faceSize: "70vmin",        // clock circle diameter
+    pendulumSize: "18vmin",    // pendulum circle diameter
+    windowColor: "#b14cf0",    // color shown around media inside the circles
     handColor: "#f5f3ec",
     secondColor: "#e8b04b",
     tickColor: "rgba(245,243,236,0.55)",
@@ -93,17 +95,19 @@ Module.register("MMM-KlydoPi", {
     const root = document.createElement("div");
     root.className = "klydo-root" + (this.config.fullscreen ? " klydo-fullscreen" : "");
     root.style.setProperty("--klydo-face", this.config.faceSize);
+    root.style.setProperty("--klydo-pend", this.config.pendulumSize);
+    root.style.setProperty("--klydo-window-bg", this.config.windowColor);
     root.style.setProperty("--klydo-hand", this.config.handColor);
     root.style.setProperty("--klydo-second", this.config.secondColor);
     root.style.setProperty("--klydo-tick", this.config.tickColor);
 
     root.innerHTML = `
-      <div class="klydo-bg" data-layer="0"></div>
-      <div class="klydo-bg" data-layer="1"></div>
-      <video class="klydo-video" data-layer="v0" muted loop playsinline></video>
-      <video class="klydo-video" data-layer="v1" muted loop playsinline></video>
-      <div class="klydo-vignette"></div>
       <div class="klydo-clock">
+        <div class="klydo-bg" data-layer="0"></div>
+        <div class="klydo-bg" data-layer="1"></div>
+        <video class="klydo-video" data-layer="v0" muted loop playsinline></video>
+        <video class="klydo-video" data-layer="v1" muted loop playsinline></video>
+        <div class="klydo-vignette"></div>
         <svg class="klydo-dial" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
           <g class="klydo-ticks"></g>
           <line class="klydo-hand klydo-hour"   x1="200" y1="200" x2="200" y2="120"/>

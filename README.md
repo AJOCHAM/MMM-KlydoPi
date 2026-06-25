@@ -11,6 +11,10 @@ and is **never sent to the browser** — required, since secret (`sk_`) keys
 must not appear in client-side code. Local backgrounds work offline; AI
 generation needs internet and an API key.
 
+The layout shows **only the round clock face and a small round pendulum** on a
+black background, like the original Klydoclock — the image or video fills the
+clock circle rather than the whole screen.
+
 ---
 
 ## Install
@@ -19,7 +23,7 @@ From your MagicMirror `modules/` folder:
 
 ```bash
 cd ~/MagicMirror/modules
-git clone https://github.com/AJOCHAM/MMM-KlydoPi
+git clone <your-repo-url> MMM-KlydoPi
 # or just copy this MMM-KlydoPi folder into modules/
 ```
 
@@ -102,7 +106,9 @@ If you put it in a normal region (e.g. `"middle_center"`) instead, set
 | `smoothSeconds` | `true` | Sweeping vs ticking second hand |
 | `showPendulum` | `true` | Show the swinging pendulum |
 | `fullscreen` | `true` | Cover the whole mirror (use with `fullscreen_below`) |
-| `faceSize` | `"70vmin"` | Clock diameter (any CSS length) |
+| `faceSize` | `"70vmin"` | Clock circle diameter (any CSS length) |
+| `pendulumSize` | `"18vmin"` | Pendulum circle diameter |
+| `windowColor` | `"#b14cf0"` | Color shown around media inside the circles |
 | `handColor` | `"#f5f3ec"` | Hour/minute hand color |
 | `secondColor` | `"#e8b04b"` | Second hand, pendulum bob, center cap |
 | `tickColor` | `rgba(245,243,236,0.55)` | Dial tick marks |
