@@ -1,0 +1,98 @@
+/* MMM-KlydoPi styles. All selectors are scoped under .klydo-root so they
+ * don't collide with other MagicMirror modules. */
+
+.klydo-root {
+  --klydo-face: 70vmin;
+  --klydo-hand: #f5f3ec;
+  --klydo-second: #e8b04b;
+  --klydo-tick: rgba(245, 243, 236, 0.55);
+  position: relative;
+}
+
+/* When fullscreen, fill the whole mirror and sit behind nothing. */
+.klydo-root.klydo-fullscreen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.klydo-root .klydo-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  filter: saturate(1.05);
+}
+.klydo-root .klydo-bg.show { opacity: 1; }
+
+.klydo-root .klydo-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+.klydo-root .klydo-video.show { opacity: 1; }
+
+.klydo-root .klydo-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 42%,
+    rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.45) 100%);
+}
+
+.klydo-root .klydo-clock {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  width: var(--klydo-face);
+  height: var(--klydo-face);
+}
+.klydo-root .klydo-dial {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.6));
+}
+
+.klydo-root .klydo-tick { stroke: var(--klydo-tick); }
+.klydo-root .klydo-tick.major { stroke-width: 3.5; }
+.klydo-root .klydo-tick.minor { stroke-width: 1.4; }
+
+.klydo-root .klydo-hand { stroke-linecap: round; transform-origin: 200px 200px; }
+.klydo-root .klydo-hour   { stroke: var(--klydo-hand);   stroke-width: 9; }
+.klydo-root .klydo-minute { stroke: var(--klydo-hand);   stroke-width: 6; }
+.klydo-root .klydo-second { stroke: var(--klydo-second); stroke-width: 2.5; }
+.klydo-root .klydo-cap    { fill: var(--klydo-second); }
+
+.klydo-root .klydo-pendulum {
+  position: absolute;
+  left: 50%;
+  bottom: 2vh;
+  transform: translateX(-50%);
+  width: 18vmin;
+  height: 30vmin;
+}
+.klydo-root .klydo-pendulum svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6));
+}
+.klydo-root .klydo-rod { stroke: var(--klydo-hand); stroke-width: 3; }
+.klydo-root .klydo-bob { fill: var(--klydo-second); stroke: rgba(0, 0, 0, 0.25); stroke-width: 2; }
+.klydo-root .klydo-swing { transform-origin: 60px 0px; }
+
+.klydo-root .klydo-status {
+  position: absolute;
+  left: 8px;
+  bottom: 6px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+}

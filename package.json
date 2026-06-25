@@ -1,0 +1,9 @@
+{
+  "name": "mmm-klydopi",
+  "version": "1.0.0",
+  "description": "Klydoclock-style animated clock module for MagicMirror²: SVG analog hands and a swinging pendulum over looping local + AI-generated backgrounds.",
+  "main": "MMM-KlydoPi.js",
+  "keywords": ["MagicMirror", "clock", "klydoclock", "ambient", "pollinations"],
+  "license": "MIT",
+  "dependencies": {}
+}
